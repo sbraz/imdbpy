@@ -81,7 +81,7 @@ NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE, DAMMIT.
 
 """
-from __future__ import generators
+from __future__ import generators, print_function
 
 __author__ = "Leonard Richardson (leonardr@segfault.org)"
 __version__ = "3.0.7a"
@@ -1967,4 +1967,4 @@ class UnicodeDammit:
 if __name__ == '__main__':
     import sys
     soup = BeautifulSoup(sys.stdin)
-    print soup.prettify()
+    print(soup.prettify())
