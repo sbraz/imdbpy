@@ -59,7 +59,7 @@ def addIndexes(cls, ifNotExists=True):
             cls.sqlmeta.addIndex(idx)
     try:
         cls.createIndexes(ifNotExists)
-    except dberrors.OperationalError, e:
+    except dberrors.OperationalError as e:
         _object_logger.warn('Skipping creation of the %s.%s index: %s' %
                             (cls.sqlmeta.table, col.name, e))
 addIndexes = classmethod(addIndexes)

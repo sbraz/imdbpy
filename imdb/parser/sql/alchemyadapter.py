@@ -128,7 +128,7 @@ class QAdapter(object):
 
     def __getattr__(self, name):
         try: return getattr(self.table.c, self.colMap[name])
-        except KeyError, e: raise AttributeError("unable to get '%s'" % name)
+        except KeyError as e: raise AttributeError("unable to get '%s'" % name)
 
     def __repr__(self):
         return '<QAdapter(table=%s, colMap=%s) [id=%s]>' % \
@@ -150,7 +150,7 @@ class RowAdapter(object):
 
     def __getattr__(self, name):
         try: return getattr(self.row, self.colMap[name])
-        except KeyError, e: raise AttributeError("unable to get '%s'" % name)
+        except KeyError as e: raise AttributeError("unable to get '%s'" % name)
 
     def __setattr__(self, name, value):
         # FIXME: I can't even think about how much performances suffer,
@@ -339,7 +339,7 @@ class TableAdapter(object):
         #      db-level.
         try:
             idx.create()
-        except exc.OperationalError, e:
+        except exc.OperationalError as e:
             _alchemy_logger.warn('Skipping creation of the %s.%s index: %s' %
                                 (self.sqlmeta.table, col.name, e))
 

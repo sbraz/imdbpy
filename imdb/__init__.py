@@ -103,7 +103,7 @@ class ConfigParserWithCase(ConfigParser.ConfigParser):
             try:
                 self.read(fname)
             except (ConfigParser.MissingSectionHeaderError,
-                    ConfigParser.ParsingError), e:
+                    ConfigParser.ParsingError) as e:
                 _aux_logger.warn('Troubles reading config file: %s' % e)
             # Stop at the first valid file.
             if self.has_section('imdbpy'):
@@ -159,7 +159,7 @@ def IMDb(accessSystem=None, *arguments, **keywords):
                 accessSystem = 'http'
             kwds.update(keywords)
             keywords = kwds
-        except Exception, e:
+        except Exception as e:
             import logging
             logging.getLogger('imdbpy').warn('Unable to read configuration' \
                                             ' file; complete error: %s' % e)
@@ -177,7 +177,7 @@ def IMDb(accessSystem=None, *arguments, **keywords):
         try:
             import logging.config
             logging.config.fileConfig(os.path.expanduser(logCfg))
-        except Exception, e:
+        except Exception as e:
             logging.getLogger('imdbpy').warn('unable to read logger ' \
                                             'config: %s' % e)
     if accessSystem in ('httpThin', 'webThin', 'htmlThin'):
@@ -770,7 +770,7 @@ class IMDbBase:
                 method = lambda *x: {}
             try:
                 ret = method(mopID)
-            except Exception, e:
+            except Exception as e:
                 self._imdb_logger.critical('caught an exception retrieving ' \
                                     'or parsing "%s" info set for mopID ' \
                                     '"%s" (accessSystem: %s)',

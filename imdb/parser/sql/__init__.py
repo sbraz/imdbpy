@@ -454,7 +454,7 @@ def get_movie_data(movieID, kindDict, fromAka=0, _table=None):
         else: Table = AkaTitle
     try:
         m = Table.get(movieID)
-    except Exception, e:
+    except Exception as e:
         _aux_logger.warn('Unable to fetch information for movieID %s: %s', movieID, e)
         mdict = {}
         return mdict
@@ -583,7 +583,7 @@ class IMDbSqlAccessSystem(IMDbBase):
                 if _gotError:
                     self._sql_logger.warn('falling back to "%s"' % mod)
                 break
-            except ImportError, e:
+            except ImportError as e:
                 if idx+1 >= nrMods:
                     raise IMDbError('unable to use any ORM in %s: %s' % (
                                                     str(useORM), str(e)))
@@ -598,7 +598,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         self._sql_logger.debug('connecting to %s', uri)
         try:
             self._connection = setConnection(uri, DB_TABLES)
-        except AssertionError, e:
+        except AssertionError as e:
             raise IMDbDataAccessError( \
                     'unable to connect to the database server; ' + \
                     'complete message: "%s"' % str(e))
@@ -695,7 +695,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         nrefs = {}
         try:
             return self._findRefs(o, trefs, nrefs)
-        except RuntimeError, e:
+        except RuntimeError as e:
             # Symbian/python 2.2 has a poor regexp implementation.
             import warnings
             warnings.warn('RuntimeError in '
@@ -983,7 +983,7 @@ class IMDbSqlAccessSystem(IMDbBase):
             q2 = [(q.movieID, get_movie_data(q.id, self._kind, fromAka=1))
                     for q in AkaTitle.select(conditionAka)]
             qr += q2
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to search the database: "%s"' % str(e))
 
@@ -1030,7 +1030,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         infosets = self.get_movie_infoset()
         try:
             res = get_movie_data(movieID, self._kind)
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to get movieID "%s": "%s"' % (movieID, str(e)))
         if not res:
@@ -1243,7 +1243,7 @@ class IMDbSqlAccessSystem(IMDbBase):
             q2 = [(q.personID, {'name': q.name, 'imdbIndex': q.imdbIndex})
                     for q in AkaName.select(conditionAka)]
             qr += q2
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to search the database: "%s"' % str(e))
 
@@ -1284,7 +1284,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         infosets = self.get_person_infoset()
         try:
             p = Name.get(personID)
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to get personID "%s": "%s"' % (personID, str(e)))
         res = {'name': p.name, 'imdbIndex': p.imdbIndex}
@@ -1419,7 +1419,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         try:
             qr = [(q.id, {'name': q.name, 'imdbIndex': q.imdbIndex})
                     for q in CharName.select(condition)]
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to search the database: "%s"' % str(e))
         res = scan_names(qr, s_name, name2, '', results,
@@ -1439,7 +1439,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         infosets = self.get_character_infoset()
         try:
             c = CharName.get(characterID)
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to get characterID "%s": "%s"' % (characterID, e))
         res = {'name': c.name, 'imdbIndex': c.imdbIndex}
@@ -1494,7 +1494,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         try:
             qr = [(q.id, {'name': q.name, 'country': q.countryCode})
                     for q in CompanyName.select(condition)]
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to search the database: "%s"' % str(e))
         qr[:] = [(x[0], build_company_name(x[1])) for x in qr]
@@ -1515,7 +1515,7 @@ class IMDbSqlAccessSystem(IMDbBase):
         infosets = self.get_company_infoset()
         try:
             c = CompanyName.get(companyID)
-        except NotFoundError, e:
+        except NotFoundError as e:
             raise IMDbDataAccessError( \
                     'unable to get companyID "%s": "%s"' % (companyID, e))
         res = {'name': c.name, 'country': c.countryCode}

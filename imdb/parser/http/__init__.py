@@ -224,7 +224,7 @@ class IMDbURLopener(FancyURLopener):
             if size != -1:
                 self.del_header('Range')
             self.close()
-        except IOError, e:
+        except IOError as e:
             if size != -1:
                 # Ensure that the Range header is removed.
                 self.del_header('Range')
@@ -342,21 +342,21 @@ class IMDbHTTPAccessSystem(IMDbBase):
         """Normalize the given movieID."""
         try:
             return '%07d' % int(movieID)
-        except ValueError, e:
+        except ValueError as e:
             raise IMDbParserError('invalid movieID "%s": %s' % (movieID, e))
 
     def _normalize_personID(self, personID):
         """Normalize the given personID."""
         try:
             return '%07d' % int(personID)
-        except ValueError, e:
+        except ValueError as e:
             raise IMDbParserError('invalid personID "%s": %s' % (personID, e))
 
     def _normalize_characterID(self, characterID):
         """Normalize the given characterID."""
         try:
             return '%07d' % int(characterID)
-        except ValueError, e:
+        except ValueError as e:
             raise IMDbParserError('invalid characterID "%s": %s' % \
                     (characterID, e))
 
@@ -364,7 +364,7 @@ class IMDbHTTPAccessSystem(IMDbBase):
         """Normalize the given companyID."""
         try:
             return '%07d' % int(companyID)
-        except ValueError, e:
+        except ValueError as e:
             raise IMDbParserError('invalid companyID "%s": %s' % \
                     (companyID, e))
 
@@ -465,10 +465,10 @@ class IMDbHTTPAccessSystem(IMDbBase):
         if isinstance(ton, unicode):
             try:
                 ton = ton.encode('utf-8')
-            except Exception, e:
+            except Exception as e:
                 try:
                     ton = ton.encode('iso8859-1')
-                except Exception, e:
+                except Exception as e:
                     pass
         ##params = 'q=%s&%s=on&mx=%s' % (quote_plus(ton), kind, str(results))
         params = 'q=%s&s=%s&mx=%s' % (quote_plus(ton), kind, str(results))

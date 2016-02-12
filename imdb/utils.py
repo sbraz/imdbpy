@@ -1475,7 +1475,7 @@ class _Container(object):
             try:
                 return modifyStrings(rawData, self.modFunct, self.titlesRefs,
                                     self.namesRefs, self.charactersRefs)
-            except RuntimeError, e:
+            except RuntimeError as e:
                 # Symbian/python 2.2 has a poor regexp implementation.
                 import warnings
                 warnings.warn('RuntimeError in '

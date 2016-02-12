@@ -452,7 +452,7 @@ def createIndexes(tables, ifNotExists=True):
                                 table._imdbpyName)
         try:
             table.addIndexes(ifNotExists)
-        except Exception, e:
+        except Exception as e:
             errors.append(e)
             continue
     return errors
@@ -469,7 +469,7 @@ def createForeignKeys(tables, ifNotExists=True):
                                 table._imdbpyName)
         try:
             table.addForeignKeys(mapTables, ifNotExists)
-        except Exception, e:
+        except Exception as e:
             errors.append(e)
             continue
     return errors
