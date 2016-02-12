@@ -260,10 +260,29 @@ static PyMethodDef cutils_methods[] = {
 };
 
 
-void
+PyMODINIT_FUNC
+#if PY_MAJOR_VERSION < 3
 initcutils(void)
 {
     Py_InitModule("cutils", cutils_methods);
+#else
+PyInit_cutils(void)
+{
+    PyObject *module;
+    static struct PyModuleDef moduledef = {
+        PyModuleDef_HEAD_INIT,
+        "cutils",
+        NULL,
+        -1,
+        cutils_methods,
+        NULL,
+        NULL,
+        NULL,
+        NULL
+    };
+    module = PyModule_Create(&moduledef);
+    return module;
+#endif
 }
 
 
