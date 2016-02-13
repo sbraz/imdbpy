@@ -30,7 +30,13 @@ __version__ = VERSION = '5.1dev20160106'
 # Import compatibility module (importing it is enough).
 from . import _compat
 
-import sys, os, ConfigParser, logging
+import sys
+import os
+import logging
+try:
+    import configparser
+except ImportError:
+    import ConfigParser as configparser
 from types import MethodType
 
 from imdb import Movie, Person, Character, Company
@@ -75,14 +81,14 @@ imdbURL_find = imdbURL_base + 'find?%s'
 # Name of the configuration file.
 confFileName = 'imdbpy.cfg'
 
-class ConfigParserWithCase(ConfigParser.ConfigParser):
+class ConfigParserWithCase(configparser.ConfigParser):
     """A case-sensitive parser for configuration files."""
     def __init__(self, defaults=None, confFile=None, *args, **kwds):
         """Initialize the parser.
 
         *defaults* -- defaults values.
         *confFile* -- the file (or list of files) to parse."""
-        ConfigParser.ConfigParser.__init__(self, defaults=defaults)
+        configparser.ConfigParser.__init__(self, defaults=defaults)
         if confFile is None:
             dotFileName = '.' + confFileName
             # Current and home directory.
@@ -102,8 +108,8 @@ class ConfigParserWithCase(ConfigParser.ConfigParser):
         for fname in confFile:
             try:
                 self.read(fname)
-            except (ConfigParser.MissingSectionHeaderError,
-                    ConfigParser.ParsingError) as e:
+            except (configparser.MissingSectionHeaderError,
+                    configparser.ParsingError) as e:
                 _aux_logger.warn('Troubles reading config file: %s' % e)
             # Stop at the first valid file.
             if self.has_section('imdbpy'):
@@ -126,7 +132,7 @@ class ConfigParserWithCase(ConfigParser.ConfigParser):
 
     def get(self, section, option, *args, **kwds):
         """Return the value of an option from a given section."""
-        value = ConfigParser.ConfigParser.get(self, section, option,
+        value = configparser.ConfigParser.get(self, section, option,
                                             *args, **kwds)
         return self._manageValue(value)
 
@@ -135,7 +141,7 @@ class ConfigParserWithCase(ConfigParser.ConfigParser):
         given section."""
         if section != 'DEFAULT' and not self.has_section(section):
             return []
-        keys = ConfigParser.ConfigParser.options(self, section)
+        keys = configparser.ConfigParser.options(self, section)
         return [(k, self.get(section, k, *args, **kwds)) for k in keys]
 
     def getDict(self, section):

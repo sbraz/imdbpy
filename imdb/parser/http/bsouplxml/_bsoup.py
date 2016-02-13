@@ -90,14 +90,20 @@ __license__ = "New-style BSD"
 
 from sgmllib import SGMLParser, SGMLParseError
 import codecs
-import markupbase
+try:
+    import _markupbase
+except ImportError:
+    import markupbase as _markupbase
 import types
 import re
 import sgmllib
 try:
-  from htmlentitydefs import name2codepoint
+    from htmlentitydefs import name2codepoint
 except ImportError:
-  name2codepoint = {}
+    try:
+        from html.entities import name2codepoint
+    except:
+        name2codepoint = {}
 try:
     set
 except NameError:
@@ -105,7 +111,7 @@ except NameError:
 
 #These hacks make Beautiful Soup able to parse XML with namespaces
 sgmllib.tagfind = re.compile('[a-zA-Z][-_.:a-zA-Z0-9]*')
-markupbase._declname_match = re.compile(r'[a-zA-Z][-_.:a-zA-Z0-9]*\s*').match
+_markupbase._declname_match = re.compile(r'[a-zA-Z][-_.:a-zA-Z0-9]*\s*').match
 
 DEFAULT_OUTPUT_ENCODING = "utf-8"
 

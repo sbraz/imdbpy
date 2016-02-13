@@ -84,7 +84,10 @@ def _putRefs(d, re_titles, re_names, re_characters, lastKey=None):
 
 
 # Handle HTML/XML/SGML entities.
-from htmlentitydefs import entitydefs
+try:
+    from html.entities import entitydefs
+except ImportError:
+    from htmlentitydefs import entitydefs
 entitydefs = entitydefs.copy()
 entitydefsget = entitydefs.get
 entitydefs['nbsp'] = ' '
