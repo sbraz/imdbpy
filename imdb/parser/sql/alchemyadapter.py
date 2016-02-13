@@ -39,7 +39,7 @@ except ImportError:
                          'Keys will not be created.')
 
 from imdb._exceptions import IMDbDataAccessError
-from dbschema import *
+from .dbschema import *
 
 # Used to convert table and column names.
 re_upper = re.compile(r'([A-Z])')

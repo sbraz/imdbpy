@@ -126,7 +126,7 @@ class Company(_Container):
 
     def __contains__(self, item):
         """Return true if this company and the given Movie are related."""
-        from Movie import Movie
+        from .Movie import Movie
         if isinstance(item, Movie):
             for m in flatten(self.data, yieldDictKeys=1, scalar=Movie):
                 if item.isSame(m):

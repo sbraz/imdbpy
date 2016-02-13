@@ -27,9 +27,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
 import re
-from utils import Attribute, Extractor, DOMParserBase, build_movie, \
+from .utils import Attribute, Extractor, DOMParserBase, build_movie, \
                     analyze_imdbid
-from personParser import DOMHTMLMaindetailsParser
+from .personParser import DOMHTMLMaindetailsParser
 
 from imdb.Movie import Movie
 
@@ -190,7 +190,7 @@ class DOMHTMLCharacterQuotesParser(DOMParserBase):
         return {'quotes': newData}
 
 
-from personParser import DOMHTMLSeriesParser
+from .personParser import DOMHTMLSeriesParser
 
 _OBJECTS = {
     'character_main_parser': ((DOMHTMLCharacterMaindetailsParser,),

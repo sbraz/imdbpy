@@ -21,10 +21,10 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
-import _bsoup as BeautifulSoup
-from _bsoup import Tag as Element
+from . import _bsoup as BeautifulSoup
+from ._bsoup import Tag as Element
 
-import bsoupxpath
+from . import bsoupxpath
 
 # Not directly used by IMDbPY, but do not remove: it's used by IMDbPYKit,
 # for example.

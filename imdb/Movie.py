@@ -287,9 +287,9 @@ class Movie(_Container):
     def __contains__(self, item):
         """Return true if the given Person object is listed in this Movie,
         or if the the given Character is represented in this Movie."""
-        from Person import Person
-        from Character import Character
-        from Company import Company
+        from .Person import Person
+        from .Character import Character
+        from .Company import Company
         if isinstance(item, Person):
             for p in flatten(self.data, yieldDictKeys=1, scalar=Person,
                             toDescend=(list, dict, tuple, Movie)):

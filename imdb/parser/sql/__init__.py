@@ -557,11 +557,11 @@ class IMDbSqlAccessSystem(IMDbBase):
             mod = mod.strip().lower()
             try:
                 if mod == 'sqlalchemy':
-                    from alchemyadapter import getDBTables, NotFoundError, \
+                    from .alchemyadapter import getDBTables, NotFoundError, \
                                                 setConnection, AND, OR, IN, \
                                                 ISNULL, CONTAINSSTRING, toUTF8
                 elif mod == 'sqlobject':
-                    from objectadapter import getDBTables, NotFoundError, \
+                    from .objectadapter import getDBTables, NotFoundError, \
                                                 setConnection, AND, OR, IN, \
                                                 ISNULL, CONTAINSSTRING, toUTF8
                 else:

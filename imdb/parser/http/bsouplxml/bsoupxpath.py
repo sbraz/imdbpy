@@ -26,7 +26,7 @@ __docformat__ = 'restructuredtext'
 
 import re
 import string
-import _bsoup as BeautifulSoup
+from . import _bsoup as BeautifulSoup
 
 
 # XPath related enumerations and constants

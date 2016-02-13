@@ -450,8 +450,8 @@ class DOMParserBase(object):
                     self._is_xml_unicode = False
                     self.usingModule = 'lxml'
                 elif mod == 'beautifulsoup':
-                    from bsouplxml.html import fromstring
-                    from bsouplxml.etree import tostring
+                    from .bsouplxml.html import fromstring
+                    from .bsouplxml.etree import tostring
                     self._is_xml_unicode = True
                     self.usingModule = 'beautifulsoup'
                 else:
@@ -549,7 +549,7 @@ class DOMParserBase(object):
         return data
 
     def _build_empty_dom(self):
-        from bsouplxml import _bsoup
+        from .bsouplxml import _bsoup
         return _bsoup.BeautifulSoup('')
 
     def get_dom(self, html_string):

@@ -38,16 +38,16 @@ from imdb import IMDbBase, imdbURL_movie_main, imdbURL_person_main, \
 from imdb.utils import analyze_title
 from imdb._exceptions import IMDbDataAccessError, IMDbParserError
 
-import searchMovieParser
-import searchPersonParser
-import searchCharacterParser
-import searchCompanyParser
-import searchKeywordParser
-import movieParser
-import personParser
-import characterParser
-import companyParser
-import topBottomParser
+from . import searchMovieParser
+from . import searchPersonParser
+from . import searchCharacterParser
+from . import searchCompanyParser
+from . import searchKeywordParser
+from . import movieParser
+from . import personParser
+from . import characterParser
+from . import companyParser
+from . import topBottomParser
 
 # Logger for miscellaneous functions.
 _aux_logger = logging.getLogger('imdbpy.parser.http.aux')

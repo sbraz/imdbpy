@@ -35,7 +35,7 @@ from imdb.Person import Person
 from imdb.Movie import Movie
 from imdb.Company import Company
 from imdb.utils import analyze_title, split_company_name_notes, _Container
-from utils import build_person, DOMParserBase, Attribute, Extractor, \
+from .utils import build_person, DOMParserBase, Attribute, Extractor, \
                     analyze_imdbid
 
 

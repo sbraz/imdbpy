@@ -26,7 +26,7 @@ import logging
 from sqlobject import *
 from sqlobject.sqlbuilder import ISNULL, ISNOTNULL, AND, OR, IN, CONTAINSSTRING
 
-from dbschema import *
+from .dbschema import *
 
 _object_logger = logging.getLogger('imdbpy.parser.sql.object')
 

@@ -26,9 +26,9 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
 from imdb.utils import analyze_company_name, build_company_name
-from utils import Extractor, Attribute, analyze_imdbid
+from .utils import Extractor, Attribute, analyze_imdbid
 
-from searchMovieParser import DOMHTMLSearchMovieParser, DOMBasicMovieParser
+from .searchMovieParser import DOMHTMLSearchMovieParser, DOMBasicMovieParser
 
 class DOMBasicCompanyParser(DOMBasicMovieParser):
     """Simply get the name of a company and the imdbID.

@@ -178,8 +178,8 @@ class Person(_Container):
     def __contains__(self, item):
         """Return true if this Person has worked in the given Movie,
         or if the fiven Character was played by this Person."""
-        from Movie import Movie
-        from Character import Character
+        from .Movie import Movie
+        from .Character import Character
         if isinstance(item, Movie):
             for m in flatten(self.data, yieldDictKeys=1, scalar=Movie):
                 if item.isSame(m):

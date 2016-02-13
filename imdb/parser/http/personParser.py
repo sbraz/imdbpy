@@ -30,11 +30,11 @@ import re
 from imdb.Movie import Movie
 from imdb.utils import analyze_name, canonicalName, normalizeName, \
                         analyze_title, date_and_notes
-from utils import build_movie, DOMParserBase, Attribute, Extractor, \
+from .utils import build_movie, DOMParserBase, Attribute, Extractor, \
                         analyze_imdbid
 
 
-from movieParser import _manageRoles
+from .movieParser import _manageRoles
 _reRoles = re.compile(r'(<li>.*? \.\.\.\. )(.*?)(</li>|<br>)',
                         re.I | re.M | re.S)
 
@@ -594,10 +594,10 @@ class DOMHTMLPersonGenresParser(DOMParserBase):
         return {self.kind: data}
 
 
-from movieParser import DOMHTMLTechParser
-from movieParser import DOMHTMLOfficialsitesParser
-from movieParser import DOMHTMLAwardsParser
-from movieParser import DOMHTMLNewsParser
+from .movieParser import DOMHTMLTechParser
+from .movieParser import DOMHTMLOfficialsitesParser
+from .movieParser import DOMHTMLAwardsParser
+from .movieParser import DOMHTMLNewsParser
 
 
 _OBJECTS = {

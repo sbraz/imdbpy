@@ -28,7 +28,7 @@ __all__ = ['IMDb', 'IMDbError', 'Movie', 'Person', 'Character', 'Company',
 __version__ = VERSION = '5.1dev20160106'
 
 # Import compatibility module (importing it is enough).
-import _compat
+from . import _compat
 
 import sys, os, ConfigParser, logging
 from types import MethodType
@@ -184,17 +184,17 @@ def IMDb(accessSystem=None, *arguments, **keywords):
         logging.warn('httpThin was removed since IMDbPY 4.8')
         accessSystem = 'http'
     if accessSystem in ('http', 'web', 'html'):
-        from parser.http import IMDbHTTPAccessSystem
+        from .parser.http import IMDbHTTPAccessSystem
         return IMDbHTTPAccessSystem(*arguments, **keywords)
     elif accessSystem in ('mobile',):
-        from parser.mobile import IMDbMobileAccessSystem
+        from .parser.mobile import IMDbMobileAccessSystem
         return IMDbMobileAccessSystem(*arguments, **keywords)
     elif accessSystem in ('local', 'files'):
         # The local access system was removed since IMDbPY 4.2.
         raise IMDbError('the local access system was removed since IMDbPY 4.2')
     elif accessSystem in ('sql', 'db', 'database'):
         try:
-            from parser.sql import IMDbSqlAccessSystem
+            from .parser.sql import IMDbSqlAccessSystem
         except ImportError:
             raise IMDbError('the sql access system is not installed')
         return IMDbSqlAccessSystem(*arguments, **keywords)
@@ -208,17 +208,17 @@ def available_access_systems():
     asList = []
     # XXX: trying to import modules is a good thing?
     try:
-        from parser.http import IMDbHTTPAccessSystem
+        from .parser.http import IMDbHTTPAccessSystem
         asList.append('http')
     except ImportError:
         pass
     try:
-        from parser.mobile import IMDbMobileAccessSystem
+        from .parser.mobile import IMDbMobileAccessSystem
         asList.append('mobile')
     except ImportError:
         pass
     try:
-        from parser.sql import IMDbSqlAccessSystem
+        from .parser.sql import IMDbSqlAccessSystem
         asList.append('sql')
     except ImportError:
         pass

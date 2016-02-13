@@ -125,8 +125,8 @@ class Character(_Container):
     def __contains__(self, item):
         """Return true if this Character was portrayed in the given Movie
         or it was impersonated by the given Person."""
-        from Movie import Movie
-        from Person import Person
+        from .Movie import Movie
+        from .Person import Person
         if isinstance(item, Person):
             for m in flatten(self.data, yieldDictKeys=1, scalar=Movie):
                 if item.isSame(m.currentRole):
