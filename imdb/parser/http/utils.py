@@ -59,11 +59,11 @@ def _putRefs(d, re_titles, re_names, re_characters, lastKey=None):
             if isinstance(d[i], (unicode, str)):
                 if lastKey in _modify_keys:
                     if re_names:
-                        d[i] = re_names.sub(ur"'\1' (qv)", d[i])
+                        d[i] = re_names.sub(r"'\1' (qv)", d[i])
                     if re_titles:
-                        d[i] = re_titles.sub(ur'_\1_ (qv)', d[i])
+                        d[i] = re_titles.sub(r'_\1_ (qv)', d[i])
                     if re_characters:
-                        d[i] = re_characters.sub(ur'#\1# (qv)', d[i])
+                        d[i] = re_characters.sub(r'#\1# (qv)', d[i])
             elif isinstance(d[i], (list, dict)):
                 _putRefs(d[i], re_titles, re_names, re_characters,
                         lastKey=lastKey)
@@ -73,11 +73,11 @@ def _putRefs(d, re_titles, re_names, re_characters, lastKey=None):
             if isinstance(v, (unicode, str)):
                 if lastKey in _modify_keys:
                     if re_names:
-                        d[k] = re_names.sub(ur"'\1' (qv)", v)
+                        d[k] = re_names.sub(r"'\1' (qv)", v)
                     if re_titles:
-                        d[k] = re_titles.sub(ur'_\1_ (qv)', v)
+                        d[k] = re_titles.sub(r'_\1_ (qv)', v)
                     if re_characters:
-                        d[k] = re_characters.sub(ur'#\1# (qv)', v)
+                        d[k] = re_characters.sub(r'#\1# (qv)', v)
             elif isinstance(v, (list, dict)):
                 _putRefs(d[k], re_titles, re_names, re_characters,
                         lastKey=lastKey)
@@ -740,17 +740,17 @@ class DOMParserBase(object):
     def add_refs(self, data):
         """Modify data according to the expected output."""
         if self.getRefs:
-            titl_re = ur'(%s)' % '|'.join([re.escape(x) for x
+            titl_re = r'(%s)' % '|'.join([re.escape(x) for x
                                             in self._titlesRefs.keys()])
-            if titl_re != ur'()': re_titles = re.compile(titl_re, re.U)
+            if titl_re != r'()': re_titles = re.compile(titl_re, re.U)
             else: re_titles = None
-            nam_re = ur'(%s)' % '|'.join([re.escape(x) for x
+            nam_re = r'(%s)' % '|'.join([re.escape(x) for x
                                             in self._namesRefs.keys()])
-            if nam_re != ur'()': re_names = re.compile(nam_re, re.U)
+            if nam_re != r'()': re_names = re.compile(nam_re, re.U)
             else: re_names = None
-            chr_re = ur'(%s)' % '|'.join([re.escape(x) for x
+            chr_re = r'(%s)' % '|'.join([re.escape(x) for x
                                             in self._charactersRefs.keys()])
-            if chr_re != ur'()': re_characters = re.compile(chr_re, re.U)
+            if chr_re != r'()': re_characters = re.compile(chr_re, re.U)
             else: re_characters = None
             _putRefs(data, re_titles, re_names, re_characters)
         return {'data': data, 'titlesRefs': self._titlesRefs,
