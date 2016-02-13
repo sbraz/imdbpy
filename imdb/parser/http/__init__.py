@@ -28,7 +28,11 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 import sys
 import socket
 import logging
-from urllib import FancyURLopener, quote_plus
+try:
+    from urllib.request import FancyURLopener
+    from urllib.parse import quote_plus
+except ImportError:
+    from urllib import FancyURLopener, quote_plus
 from codecs import lookup
 
 from imdb import IMDbBase, imdbURL_movie_main, imdbURL_person_main, \

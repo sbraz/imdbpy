@@ -28,7 +28,10 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 """
 
 import re
-import urllib
+try:
+    from urllib.parse import unquote
+except ImportError:
+    from urllib import unquote
 
 from imdb import imdbURL_base
 from imdb.Person import Person
@@ -1204,7 +1207,7 @@ class DOMHTMLOfficialsitesParser(DOMParserBase):
                     'info': "./text()"
                 },
                 postprocess=lambda x: (x.get('info').strip(),
-                            urllib.unquote(_normalize_href(x.get('link'))))))
+                            unquote(_normalize_href(x.get('link'))))))
         ]
 
 
