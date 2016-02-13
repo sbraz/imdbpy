@@ -1011,9 +1011,12 @@ TAGS_TO_MODIFY = {
     'character.quotes.item.quote': ('line', False)
     }
 
-_allchars = string.maketrans('', '')
-_keepchars = _allchars.translate(_allchars, string.ascii_lowercase + '-' +
-                                 string.digits)
+try:
+    _allchars = bytes.maketrans(b'', b'')
+except AttributeError:
+    _allchars = string.maketrans('', '')
+_keepchars = _allchars.translate(_allchars, string.ascii_lowercase.encode("ascii") + b'-' +
+                                 string.digits.encode("ascii"))
 
 def _tagAttr(key, fullpath):
     """Return a tuple with a tag name and a (possibly empty) attribute,

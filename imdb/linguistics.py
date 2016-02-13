@@ -47,12 +47,12 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 # I'm not sure what '-al' is, and so I've left it out...
 #
 # Generic list of articles in utf-8 encoding:
-GENERIC_ARTICLES = ('the', 'la', 'a', 'die', 'der', 'le', 'el',
-            "l'", 'il', 'das', 'les', 'i', 'o', 'ein', 'un', 'de', 'los',
-            'an', 'una', 'las', 'eine', 'den', 'het', 'gli', 'lo', 'os',
-            'ang', 'oi', 'az', 'een', 'ha-', 'det', 'ta', 'al-',
-            'mga', "un'", 'uno', 'ett', 'dem', 'egy', 'els', 'eines',
-            '\xc3\x8f', '\xc3\x87', '\xc3\x94\xc3\xaf', '\xc3\x8f\xc3\xa9')
+GENERIC_ARTICLES = (b'the', b'la', b'a', b'die', b'der', b'le', b'el',
+            b"l'", b'il', b'das', b'les', b'i', b'o', b'ein', b'un', b'de', b'los',
+            b'an', b'una', b'las', b'eine', b'den', b'het', b'gli', b'lo', b'os',
+            b'ang', b'oi', b'az', b'een', b'ha-', b'det', b'ta', b'al-',
+            b'mga', b"un'", b'uno', b'ett', b'dem', b'egy', b'els', b'eines',
+            b'\xc3\x8f', b'\xc3\x87', b'\xc3\x94\xc3\xaf', b'\xc3\x8f\xc3\xa9')
 
 
 # Lists of articles separated by language.  If possible, the list should
@@ -174,7 +174,7 @@ def addTrailingSpace(articles):
     _spUnicodeArticles = []
     for article in articles:
         if article[-1] not in ("'", '-'):
-            article += ' '
+            article += b' '
         _spArticles.append(article)
         _spUnicodeArticles.append(article.decode('utf_8'))
     return _spArticles, _spUnicodeArticles
